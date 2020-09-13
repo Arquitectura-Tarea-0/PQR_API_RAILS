@@ -53,6 +53,6 @@ class RequestsController < ApplicationController
   private
 
   def requests_params
-    params.permit(:type, :subject, :description)
+    params.permit(:request_type, :subject, :description)
   end
 end
