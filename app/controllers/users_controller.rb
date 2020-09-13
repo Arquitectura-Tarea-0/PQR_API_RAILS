@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :authorized, only: %i[auto_login create]
+  before_action :authorized, only: %i[auto_login]
 
   # REGISTER
   def create
