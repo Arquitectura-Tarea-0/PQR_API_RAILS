@@ -21,14 +21,11 @@ class RequestsController < ApplicationController
   end
 
   def general_requests
-    
-    unless params.blank?
-      params = params.delete_if {|key, value| value.blank?} 
-      @requests = Request.where(params)            
+    if params.blank?
+      @requests = Request.all            
     else
-      @requests = Request.all
+      @requests = Request.where(params)
     end
-
     if @requests
       render json: { request: @requests, status: "ok"}
     else
@@ -37,11 +34,10 @@ class RequestsController < ApplicationController
   end
 
   def user_requests        
-    unless params.blank?
-      params = params.delete_if {|key, value| value.blank?}
-      @requests = @user.requests.where(params)            
+    if params.blank?
+      @requests = @user.requests                  
     else
-      @requests = @user.requests
+      @requests = @user.requests.where(params)
     end
 
     if @requests
