@@ -21,8 +21,9 @@ class RequestsController < ApplicationController
   end
 
   def general_requests
-    params = params.delete_if {|key, value| value.blank?}
+    
     unless params.blank?
+      params = params.delete_if {|key, value| value.blank?} 
       @requests = Request.where(params)            
     else
       @requests = Request.all
@@ -35,9 +36,9 @@ class RequestsController < ApplicationController
     end
   end
 
-  def user_requests    
-    params = params.delete_if {|key, value| value.blank?}
+  def user_requests        
     unless params.blank?
+      params = params.delete_if {|key, value| value.blank?}
       @requests = @user.requests.where(params)            
     else
       @requests = @user.requests
