@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_09_13_021814) do
 
   create_table "requests", force: :cascade do |t|
     t.string "request_state"
-    t.string "request_type"
+    t.integer "request_type", default: 0
     t.string "subject"
     t.text "description"
     t.datetime "responded_at"
