@@ -8,5 +8,8 @@ class Request < ApplicationRecord
 
   def notify_update
     RequestMailer.notice_request(user, self).deliver_now
+    User.where(role: :admin).each do |u|
+    	RequestMailer.notice_request(u, self).deliver_now
+	end
   end
 end

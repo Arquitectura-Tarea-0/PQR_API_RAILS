@@ -29,7 +29,7 @@ class RequestsController < ApplicationController
     if @requests
       render json: { request: @requests, status: "ok"}
     else
-      render json: { error: "invalid params"}                  
+      render json: { error: "invalid params"}
     end
   end
 
@@ -48,8 +48,8 @@ class RequestsController < ApplicationController
   end
 
   def get_request
-    @request = Request.find(params[:id])
-    render json: { request: @request }
+    @request = Request.find(params[:id]).to_json(include: :notes)
+    render json: { request: JSON.parse(@request) }
   end
 
   private

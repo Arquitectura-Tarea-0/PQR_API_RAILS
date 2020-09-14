@@ -31,8 +31,8 @@ class UsersController < ApplicationController
   end
 
   def get_user
-    @user = User.find(params[:id])
-    render json: { user: @user}
+    @user = User.find(params[:id]).to_json(include: :requests)
+    render json: { user: JSON.parse(@user) }
   end
 
   def get_users

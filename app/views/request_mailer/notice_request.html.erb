@@ -4,9 +4,17 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hola <%= @user&.email %></h1>
-    <p>
-      Hay una novedad en la PQR: <%= @pqr&.subject %> con estado: <%= @pqr&.request_state %>
-    </p>
+  	<% unless @user.admin? %>
+	    <h1>Hola <%= @user&.email %></h1>
+	    <p>
+	      Hay una novedad en la PQR: <%= @pqr&.subject %> con estado: <%= @pqr&.request_state %>
+	    </p>
+  	<% else %>
+  		<h1>Hola Admin</h1>
+	    <p>
+	      Hay una novedad en la PQR: <%= @pqr&.subject %> con estado: <%= @pqr&.request_state %> del usuario <%= @pqr&.user&.email %> 
+	    </p>
+  	<% end %>
+
   </body>
 </html>

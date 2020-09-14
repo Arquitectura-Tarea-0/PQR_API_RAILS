@@ -15,6 +15,15 @@ class NotesController < ApplicationController
     end
   end
 
+  def request_notes
+    @notes = @request.notes.includes(:request)
+    if @notes
+      render json: { notes: @notes, status: "ok"}
+    else
+      render json: { error: "invalid params"}                  
+    end
+  end
+
   def user_notes
     @notes = @user.notes.includes(:request)
     if @notes
