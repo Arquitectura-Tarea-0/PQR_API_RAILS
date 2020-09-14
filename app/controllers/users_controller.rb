@@ -30,7 +30,30 @@ class UsersController < ApplicationController
     render json: @user
   end
 
+  def get_user
+    @user = User.find(params[:id])
+    render json: { user: @user}
+  end
+
+  def get_users
+    if search_params.blank?
+      @users = User.includes(:requests).all           
+    else
+      @users = User.includes(:requests).where(search_params)
+    end
+    if @users
+      render json: { users: @users, status: "ok"}
+    else
+      render json: { error: "invalid params"}                  
+    end
+  end
+
   private
+
+
+  def search_params
+    params.permit(:name, :password_digest, :role, :email).delete_if {|key, value| value.blank?}
+  end
 
   def user_params
     params.permit(:name, :password, :email)
