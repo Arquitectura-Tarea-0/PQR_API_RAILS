@@ -21,10 +21,10 @@ class RequestsController < ApplicationController
   end
 
   def general_requests
-    if requests_params.blank?
-      @requests = Request.all            
+    if search_params.blank?
+      @requests = Request.includes(:user).all           
     else
-      @requests = Request.where(requests_params)
+      @requests = Request.includes(:user).where(search_params)
     end
     if @requests
       render json: { request: @requests, status: "ok"}
@@ -34,10 +34,10 @@ class RequestsController < ApplicationController
   end
 
   def user_requests        
-    if requests_params.blank?
-      @requests = @user.requests                  
+    if search_params.blank?
+      @requests = @user.requests.includes(:user)                  
     else
-      @requests = @user.requests.where(requests_params)
+      @requests = @user.requests.includes(:user).where(search_params)
     end
 
     if @requests
@@ -47,9 +47,18 @@ class RequestsController < ApplicationController
     end    
   end
 
+  def get_request
+    @request = Request.find(params[:id])
+    render json: { request: @request }
+  end
+
   private
 
+  def search_params
+    params.permit(:request_type, :request_state, :subject, :description, :user_id).delete_if {|key, value| value.blank?}
+  end
+
   def requests_params
-    params.permit(:request_type, :subject, :description)
+    params.permit(:request_type, :request_state, :subject, :description)
   end
 end
