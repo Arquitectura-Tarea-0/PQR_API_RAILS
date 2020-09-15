@@ -16,9 +16,9 @@ class NotesController < ApplicationController
   end
 
   def request_notes
-    @notes = @request.notes.includes(:request)
+    @notes = @request.notes.to_json(include: :user)
     if @notes
-      render json: { notes: @notes, status: "ok"}
+      render json: { notes: JSON.parse(@notes), status: "ok"}
     else
       render json: { error: "invalid params"}                  
     end
@@ -34,10 +34,10 @@ class NotesController < ApplicationController
   end
 
   def get_notes
-    @notes = @request.notes.includes(:request)           
+    @notes = @request.notes.to_json(include: :request)           
         
     if @notes
-      render json: { notes: @notes, status: "ok"}
+      render json: { notes: JSON.parse(@notes), status: "ok"}
     else
       render json: { error: "invalid params"}                  
     end
