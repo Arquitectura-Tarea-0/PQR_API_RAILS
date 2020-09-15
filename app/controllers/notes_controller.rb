@@ -34,7 +34,7 @@ class NotesController < ApplicationController
   end
 
   def get_notes
-    @notes = @request.notes.to_json(include: :request)           
+    @notes = @request.notes.to_json(include: :user)           
         
     if @notes
       render json: { notes: JSON.parse(@notes), status: "ok"}
