@@ -35,9 +35,9 @@ class RequestsController < ApplicationController
 
   def user_requests        
     if search_params.blank?
-      @requests = @user.requests.includes(:user)                  
+      @requests = @user.requests.to_json(include: :user)                  
     else
-      @requests = @user.requests.includes(:user).where(search_params)
+      @requests = @user.requests.where(search_params).to_json(include: :user)
     end
 
     if @requests
