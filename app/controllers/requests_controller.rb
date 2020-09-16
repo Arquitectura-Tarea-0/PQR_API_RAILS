@@ -41,7 +41,7 @@ class RequestsController < ApplicationController
     end
 
     if @requests
-      render json: { request: @requests, status: "ok"}
+      render json: { request: JSON.parse(@requests), status: "ok"}
     else
       render json: { error: "invalid params"}                  
     end    
