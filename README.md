@@ -12,13 +12,27 @@ ruby '2.6.3', you can use any ruby version manager in order to install the requi
 
 * Install the bundle gem, this gem will allow you to install any other dependencies in the app's gemfile
 
+``` gem install bundle```
+
 * Run Bundle install to install all the required dependencies for the app to run
+
+``` bundle install ```
 
 * Run rails db:create to instance the database
 
+``` rails db:create```
+
 * Run rails db:migrate in order to run all the required or pending migrations
 
+```rails db:migrate```
+
 * You can run rails db:seed to get a dummy user into the data base so you can start testing any other feature
+
+``` rails db:seed ```
+
+* You can then go ahead and start the rails server to use the app localy
+
+```rails s```
 
 **Documentation of the API:**
 
