@@ -1,7 +1,7 @@
 # README
 **Introduction:**
 
-This API is used as an epicenter for all the different apps that are developed for homewrok #0. It'll host the data base of the system and the other apps will request to it as needed.
+This API is used as an epicenter for all the different apps that are developed for homework #0. It'll host the data base of the system and the other apps will request to it as needed.
 This read me will feature how to set up the API in a local environment, however, the API is deployed and can be accessed by using pqr-api-rails.herokuapp.com as a root address.
 
 **Requirements:**
