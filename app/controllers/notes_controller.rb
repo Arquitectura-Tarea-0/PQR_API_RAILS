@@ -17,11 +17,8 @@ class NotesController < ApplicationController
 
   def request_notes
     @notes = @request.notes.to_json(include: :user)
-    if @notes
-      render json: { notes: JSON.parse(@notes), status: "ok"}
-    else
-      render json: { error: "invalid params"}                  
-    end
+    
+    render json: response_json    
   end
 
   def user_notes
@@ -36,11 +33,7 @@ class NotesController < ApplicationController
   def get_notes
     @notes = @request.notes.to_json(include: :user)           
         
-    if @notes
-      render json: { notes: JSON.parse(@notes), status: "ok"}
-    else
-      render json: { error: "invalid params"}                  
-    end
+    render json: response_json                  
   end
 
   def get_note
@@ -58,4 +51,8 @@ class NotesController < ApplicationController
   def notes_params
     params.permit(:description)
   end
+
+  def response_json
+    @notes ? { notes: JSON.parse(@notes), status: "ok"} : { error: "invalid params"}
+  end  
 end
